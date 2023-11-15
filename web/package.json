@@ -30,7 +30,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"nodemon ./src/api/index.js\" \"react-scripts start\""
+    "start": "concurrently \"nodemon ./src/api/index.js\" \"react-scripts start\"",
+    "dev": "react-scripts start" 
   },
   "eslintConfig": {
     "extends": [

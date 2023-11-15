@@ -38,11 +38,11 @@ router.post('/getInfo', jsonParser, async (req, res) => {
 //Get all Method
 router.get('/getAll', async (req, res) => {
     try {
-        const data = await Model.find()
+        const data = await Order.find()
         res.json(data)
     }
     catch (error) {
-        res.status(500).json({message: eror.message})
+        res.status(500).json({message: error.message})
     }
 })
 
