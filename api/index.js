@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes/routes');
 const HID = require('node-hid');
+const cors = require('cors');
 require('dotenv').config();
 
 const mongoString = process.env.DATABASE_URL
