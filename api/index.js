@@ -31,6 +31,7 @@ app.get('/', (req, res) =>{
 app.get('/checkDevice', (req, res) => {
   try {
     const device = new HID.HID(16701, 8455);
+    console.log("device connect")
     res.json({ success: true });
   } catch (error) {
     res.json({ success: false, error: error.message });
