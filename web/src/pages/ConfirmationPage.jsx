@@ -31,6 +31,7 @@ const ConfirmationPage = () => {
   
     setActiveButton(buttonName === activeButton ? null : buttonName);
     setLoading(true);
+    
     fetch(`${process.env.API_URL}/api/postOrder`, {
       method: 'POST',
       headers: {
