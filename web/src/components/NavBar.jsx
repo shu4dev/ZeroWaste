@@ -6,7 +6,7 @@ import { signOut } from 'firebase/auth';
 const NavBar = () => {
   const [user, loading] = useAuthState(auth);
 
-  fetch('/express_backend')
+  fetch(`${process.env.API_URL}/express_backend`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
