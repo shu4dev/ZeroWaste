@@ -10,15 +10,15 @@ mongoose.connect(mongoString, { dbName: 'main'});
 const port = 4000;
 const database = mongoose.connection
 const app = express();
+
+app.use('/api', routes)
+app.use(express.json());
+app.use(cors())
 app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
  });
-
-app.use('/api', routes)
-app.use(express.json());
-
 app.get('/', (req, res) =>{
   res.send("Hello World")
 })

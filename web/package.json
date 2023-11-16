@@ -31,7 +31,7 @@
   },
   "scripts": {
     "start": "concurrently \"nodemon ./src/api/index.js\" \"react-scripts start\"",
-    "dev": "react-scripts start" 
+    "dev": "react-scripts start"
   },
   "eslintConfig": {
     "extends": [
