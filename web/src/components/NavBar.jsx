@@ -14,6 +14,7 @@ const NavBar = () => {
       return response.json();
     })
     .then(data => {
+      console.log("back-end ok");
     })
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
