@@ -11,10 +11,10 @@ const NavBar = () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
+      console.log("back-end ok");
       return response.json();
     })
     .then(data => {
-      console.log("back-end ok");
     })
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
