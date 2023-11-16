@@ -16,7 +16,7 @@ const ConfirmationPage = () => {
     document.addEventListener('keypress', detectKeyPress);
     const checkDevice = async () => {
       try {
-        const response = await fetch('/checkDevice');
+        const response = await fetch(`${process.env.API_URL}/checkDevice`);
         const result = await response.json();
         setDeviceStatus(result.success);
       } catch (error) {
@@ -31,7 +31,7 @@ const ConfirmationPage = () => {
   
     setActiveButton(buttonName === activeButton ? null : buttonName);
     setLoading(true);
-    fetch('/api/postOrder', {
+    fetch(`${process.env.API_URL}/api/postOrder`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', 

@@ -25,7 +25,7 @@ const ResultPage = () => {
       qrurl = url;
     })
     useEffect(() => {
-      fetch(`../api/getOne/${OrderId}`, {
+      fetch(`${process.env.API_URL}/api/getOne/${OrderId}`, {
         method: "GET"
       })
       .then(response => response.json())
