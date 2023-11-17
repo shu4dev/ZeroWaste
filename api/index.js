@@ -1,22 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
-
-
-const mongoString = process.env.DATABASE_URL
-mongoose.connect(mongoString, { dbName: 'main'});
-
-
 const app = express();
-
-app.use(cors({
-  origin:'*', 
-  credentials:true,
-  optionSuccessStatus:200,
-}))
-
-app.use(express.json());
 
 
 app.get('/', (req, res) =>{
@@ -24,6 +7,20 @@ app.get('/', (req, res) =>{
 })
 
 /**
+ * const mongoose = require('mongoose');
+const cors = require('cors');
+require('dotenv').config();
+
+
+const mongoString = process.env.DATABASE_URL
+mongoose.connect(mongoString, { dbName: 'main'});
+
+ * app.use(cors({
+  origin:'*', 
+  credentials:true,
+  optionSuccessStatus:200,
+}))
+app.use(express.json());
  * const routes = require('./routes/routes');
 const HID = require('node-hid');
  * const devices = HID.devices();
