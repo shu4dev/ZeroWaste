@@ -1,16 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const routes = require('./routes/routes');
-const HID = require('node-hid');
 const cors = require('cors');
 require('dotenv').config();
-const devices = HID.devices();
+
 
 const mongoString = process.env.DATABASE_URL
 mongoose.connect(mongoString, { dbName: 'main'});
 
-const port = process.env.PORT;
-const database = mongoose.connection
+
 const app = express();
 
 app.use(cors({
@@ -21,18 +18,32 @@ app.use(cors({
 
 app.use(express.json());
 
-app.all('/', function(req, res, next) {
+
+app.get('/', (req, res) =>{
+  res.send("Hello World");
+})
+
+/**
+ * const routes = require('./routes/routes');
+const HID = require('node-hid');
+ * const devices = HID.devices();
+ * const port = process.env.PORT;
+const database = mongoose.connection
+ * app.all('/', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
  });
 
 app.use('/api', routes)
-app.get('/', (req, res) =>{
-  res.send("Hello World")
-})
 
-
+app.get('/checkDevice', (req, res) => {
+  try {
+    res.json({ success: true, device: devices });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
+  }
+});
 
 app.get('/express_backend', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
@@ -50,3 +61,4 @@ database.once('connected', () => {
 app.listen(port, () => {
   console.log(`Server Started at ${port}`)
 })
+ */
