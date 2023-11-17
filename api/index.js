@@ -4,6 +4,7 @@ const routes = require('./routes/routes');
 const HID = require('node-hid');
 const cors = require('cors');
 require('dotenv').config();
+const devices = HID.devices();
 
 const mongoString = process.env.DATABASE_URL
 mongoose.connect(mongoString, { dbName: 'main'});
@@ -32,7 +33,8 @@ app.get('/', (req, res) =>{
 app.get('/checkDevice', (req, res) => {
   try {
     const device = new HID.HID(16701, 8455);
-    console.log("device connect")
+    console.log(devices);
+    console.log("device connect");
     res.json({ success: true });
   } catch (error) {
     res.json({ success: false, error: error.message });
