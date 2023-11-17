@@ -26,6 +26,7 @@ const ResultPage = () => {
     })
     useEffect(() => {
       fetch(`https://zero-waste-api.vercel.app/api/getOne/${OrderId}`, {
+        mode: 'no-cors',
         method: "GET"
       })
       .then(response => response.json())

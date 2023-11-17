@@ -33,6 +33,7 @@ const ConfirmationPage = () => {
     setLoading(true);
     
     fetch('https://zero-waste-api.vercel.app/api/postOrder', {
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', 

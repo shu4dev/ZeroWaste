@@ -7,15 +7,16 @@ require('dotenv').config();
 
 const mongoString = process.env.DATABASE_URL
 mongoose.connect(mongoString, { dbName: 'main'});
-
+const corsOptions ={
+  origin:'*', 
+  credentials:true,            
+  optionSuccessStatus:200,
+}
 const port = 4000;
 const database = mongoose.connection
+
 const app = express();
-app.use(cors({
-  origin:'*', 
-  credentials:true,
-  optionSuccessStatus:200,
-}))
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.all('/', function(req, res, next) {
