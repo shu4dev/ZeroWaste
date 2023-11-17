@@ -1,8 +1,33 @@
 const express = require('express');
-const app = express();
+const mongoose = require('mongoose');
+const cors = require('cors');
 require('dotenv').config();
+const HID = require('node-hid');
+const routes = require('./routes/routes');
+const devices = HID.devices();
+const mongoString = process.env.DATABASE_URL
+mongoose.connect(mongoString, { dbName: 'main'});
+const database = mongoose.connection
+
+const app = express();
+
 const port = process.env.PORT;
-app.get('/', (req, res) =>{
+
+app.use(express.json());
+
+app.use(cors({
+  origin:'*', 
+  credentials:true,
+  optionSuccessStatus:200,
+}))
+
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
+
+ app.get('/', (req, res) =>{
 
   res.send("Hello World");
 })
@@ -10,31 +35,23 @@ app.get('/', (req, res) =>{
 app.listen(port, () => {
   console.log(`Server Started at ${port}`)
 })
+
+database.on('error', (error) => {
+  console.log(error)
+})
+
+database.once('connected', () => {
+  console.log('Database Connected');
+})
 /**
- * const mongoose = require('mongoose');
-const cors = require('cors');
+ * 
 
 
 
-const mongoString = process.env.DATABASE_URL
-mongoose.connect(mongoString, { dbName: 'main'});
 
- * app.use(cors({
-  origin:'*', 
-  credentials:true,
-  optionSuccessStatus:200,
-}))
-app.use(express.json());
- * const routes = require('./routes/routes');
-const HID = require('node-hid');
- * const devices = HID.devices();
- * const port = process.env.PORT;
-const database = mongoose.connection
- * app.all('/', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
- });
+
+ * 
+
 
 app.use('/api', routes)
 
@@ -51,13 +68,7 @@ app.get('/express_backend', (req, res) => {
 }); 
 
 
-database.on('error', (error) => {
-  console.log(error)
-})
 
-database.once('connected', () => {
-  console.log('Database Connected');
-})
 
 
  */
