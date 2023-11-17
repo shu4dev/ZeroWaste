@@ -9,7 +9,7 @@ const devices = HID.devices();
 const mongoString = process.env.DATABASE_URL
 mongoose.connect(mongoString, { dbName: 'main'});
 
-const port = 4000;
+const port = "zero-waste-api.vercel.app";
 const database = mongoose.connection
 const app = express();
 app.use(cors({
