@@ -6,7 +6,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const mongoString = process.env.DATABASE_URL
-mongoose.connect(mongoString, { dbName: 'main'});
+mongoose.connect(mongoString, { dbName: 'Master'});
 
 const port = 4000;
 const database = mongoose.connection

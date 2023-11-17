@@ -1,15 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Card, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const SearchPage = () => {
-
+  const [orderlist, setorderlist] = useState();
   const navigate = useNavigate();
   const [OrderId, setOrderid] = useState();
   const handleSearch = () =>{
     
     navigate(`/result/${OrderId}`);
   }
+
+  useEffect(()=>{
+    fetch('https://zero-waste-api.vercel.app/api/getAll')
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      setorderlist(data);
+    })
+    .catch(error => {
+      console.log('Error fetching data', error);
+    })
+  })
 
   return (
     <Container className="mt-5 vh-100">
@@ -47,6 +60,14 @@ const SearchPage = () => {
             </thead>
             <tbody>
               
+                {
+                orderlist ? orderlist.map((order) => (
+                  <tr>
+                    <td>{order._id}</td>
+                    <td>{order._id}</td>
+                  </tr>
+                )) : <></>
+                }
             </tbody>
           </Table>
             </div>
