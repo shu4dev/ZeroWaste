@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Card } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Card, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
 const SearchPage = () => {
@@ -36,6 +36,18 @@ const SearchPage = () => {
             <Button variant="primary" type="submit" className="my-3 px-5">
               Search
             </Button>
+            <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Detail</th>
+                <th>status</th>
+                <th>Add to your account</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </Table>
             </div>
           </Form>
           </Card>

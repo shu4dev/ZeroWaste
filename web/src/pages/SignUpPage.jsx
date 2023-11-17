@@ -15,7 +15,7 @@ const SignUpPage = () => {
         .catch((error) => {
             console.log(error.code, error.message);
         });
-        navigate("/signin");
+        navigate("/");
     }
 
 
