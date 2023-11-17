@@ -2,9 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
-const HID = require('node-hid');
-const routes = require('./routes/routes');
-const devices = HID.devices();
 const mongoString = process.env.DATABASE_URL
 mongoose.connect(mongoString, { dbName: 'main'});
 const database = mongoose.connection
@@ -43,6 +40,7 @@ database.on('error', (error) => {
 database.once('connected', () => {
   console.log('Database Connected');
 })
+
 /**
  * 
 
