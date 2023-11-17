@@ -10,9 +10,6 @@ const SignUpPage = () => {
     const navigate = useNavigate();
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => { 
-          const user = userCredential.user;
-        })
         .catch((error) => {
             console.log(error.code, error.message);
         });

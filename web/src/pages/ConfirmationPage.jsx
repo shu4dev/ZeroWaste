@@ -25,7 +25,7 @@ const ConfirmationPage = () => {
       }
     };
     checkDevice();
-  },[])
+  })
 
   const handleClick = (buttonName) => {
   

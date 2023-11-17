@@ -15,7 +15,6 @@ export default function SignInPage()  {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
-      const user = userCredential.user;
       navigate("/")
     })
     .catch((error) => {

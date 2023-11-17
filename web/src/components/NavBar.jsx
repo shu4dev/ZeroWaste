@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth} from '../firebase';
 import { signOut } from 'firebase/auth';
 const NavBar = () => {
-  const [user, loading] = useAuthState(auth);
+  const [user] = useAuthState(auth);
 
   fetch('https://zero-waste-zeta.vercel.app/express_backend')
     .then(response => {

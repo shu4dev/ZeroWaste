@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Form, Button, Image } from 'react-bootstrap';
-import {auth} from "../firebase"
-import {useAuthState} from "react-firebase-hooks/auth";
 
 const  OrderPage = () => {
 
-  const [user] = useAuthState(auth);
   const navigate = useNavigate();
   
   const items = [
