@@ -12,11 +12,13 @@ mongoose.connect(mongoString, { dbName: 'main'});
 const port = process.env.PORT;
 const database = mongoose.connection
 const app = express();
+
 app.use(cors({
   origin:'*', 
   credentials:true,
   optionSuccessStatus:200,
 }))
+
 app.use(express.json());
 
 app.all('/', function(req, res, next) {
@@ -32,7 +34,6 @@ app.get('/', (req, res) =>{
 
 app.get('/checkDevice', (req, res) => {
   try {
-    console.log("device connect");
     res.json({ success: true, device: devices });
   } catch (error) {
     res.json({ success: false, error: error.message });
