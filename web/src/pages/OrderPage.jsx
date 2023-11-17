@@ -1,7 +1,9 @@
 import React, { useState} from 'react';
+import '../stylesheets/index.css';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Card, Form, Button, Image } from 'react-bootstrap';
+
 
 const  OrderPage = () => {
 
@@ -107,9 +109,9 @@ const  OrderPage = () => {
             <Row>
               {items.map((item) => (
                 <Col key={item.name} md={6}>
-                  <Card className="mb-3 text-center">
+                  <Card className="mb-2 text-center" style={{ flex: 1 }}>
                     <Card.Header>
-                      <Image src={item.image} width={300} height={300}/>
+                      <Image src={item.image} width={200} height={200}/>
                       <Card.Title>{item.name}</Card.Title>
                       <Card.Subtitle>{item.size}</Card.Subtitle>
                     </Card.Header>
@@ -128,15 +130,17 @@ const  OrderPage = () => {
               ))}
             </Row>
           </Col>
-          <Col md={4}>
-            <Card className="mb-3">
-              <Card.Body>
-                <Card.Title>Selected Items</Card.Title>
+          <Col md={3}>
+            <Card className="mb-3 p-3 text-white" style={{backgroundColor:"#2f3e46"}}>
+                <Card.Title className="text-center p-1">Selected Items</Card.Title>
+                <Card.Body>
                   <ul>
                     { order.map((item)=> item.quantity > 0 && <li>{item.name} {item.quantity}</li>)}
                   </ul>
-                <Button variant="primary" type="submit">Place Order</Button>
-              </Card.Body>
+                </Card.Body>
+              <Card.Footer className="text-center py-3">
+                <Button variant="primary" type="submit" >Place Order</Button>
+              </Card.Footer>
             </Card>
           </Col>
         </Row>

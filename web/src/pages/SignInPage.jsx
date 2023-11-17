@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import '../stylesheets/index.css';
+import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 import { auth } from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate} from 'react-router-dom';
@@ -9,7 +10,22 @@ export default function SignInPage()  {
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  
+  const [error, setError] = useState();
+  const errorSwitch = (errorCode) => {
+
+    switch(errorCode){
+      case 'auth/invalid-email':
+        return ("Email address not found: Please make an account.");
+      case 'auth/invalid-login-credentials':
+        return ("Incorrect password: Check if your email is inputed correctly. Please try again.");
+      case 'auth/too-many-requests':
+        return("Too many failed attempts: Please try again later, or contact us regarding this issue.");
+      default:
+        if(errorCode !== undefined){
+          return("Please contact us with error code: " + errorCode);
+        }
+    }
+  }
 
   const handleSignIn = (e) => {
     e.preventDefault();
@@ -19,6 +35,7 @@ export default function SignInPage()  {
     })
     .catch((error) => {
       console.log(error.code, error.message);
+      setError(error.code);
     });
   };
   
@@ -29,7 +46,8 @@ export default function SignInPage()  {
     </Row>
 
     <Row className="justify-content-center">
-      <Col className="col-10" xs={6} md={5}>
+      <Col className="col-10 mt-3" xs={6} md={5}>
+        <Card className="p-5" style={{backgroundColor:"#e1ecf7"}}>
         <Form onSubmit={handleSignIn}>
 
           <Form.Group controlId="formUsernameSignUp" className="my-3">
@@ -51,14 +69,19 @@ export default function SignInPage()  {
               required
             />
           </Form.Group>
+          <div className="text-center warning">
+            {errorSwitch(error)}
+          </div>
           <div className="text-center">
           <Button variant="primary" type="submit" className="my-3 px-5">
             Sign In
           </Button>
           </div>
         </Form>
+        </Card>
       </Col>
     </Row>
+
   </Container>
   );
 };

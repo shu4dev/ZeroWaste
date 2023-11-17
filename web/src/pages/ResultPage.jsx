@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Container, Row, Col, Image, Card } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 let qrurl = "";
 
@@ -26,7 +26,6 @@ const ResultPage = () => {
     })
     useEffect(() => {
       fetch(`https://zero-waste-api.vercel.app/api/getOne/${OrderId}`, {
-        mode: 'no-cors',
         method: "GET"
       })
       .then(response => response.json())
@@ -40,27 +39,37 @@ const ResultPage = () => {
       const filteredKeyValuePairs = apiData ? Object.entries(apiData).filter(([key, value]) => value > 0): [];
   return (
     <Container className="mt-5 vh-100">
-        <Row className="justify-content-center">
-          <Col className="text-center">
-            <h2>Thank you for ordering</h2>
+        <Row className="justify-content-center text-center">
+            <h1>Thank you for ordering</h1>
             <br/>
-            <h2>Your Order ID is {OrderId}</h2>
-          </Col>
+            <h3>Your Order ID: {OrderId}</h3>
         </Row>
-        <Row className="justify-content-center">
-          <Col className="col-10" xs={6} md={5}>
-          <h3>Detail</h3>
-          <ul>
-          {filteredKeyValuePairs.map(([key, value]) => (
-            <li key={key}>
-              {key}: {value}
-            </li>
-            ))}
-          </ul>
-          </Col>
-          </Row>
-          <h5>Use this QRcode to see you order again</h5>
-          <Image src = {qrurl} />
+
+        <Row xs={1} md={2} className="g-4 justify-content-center m-3">
+          <Card className="p-5" style={{backgroundColor:"#e1ecf7"}}>
+            <Card.Title>
+            <h3 className="text-center">Order Details</h3>
+              <br/>
+
+                  <Col className="col-12">
+                    <Card className="p-3">
+                      <ul>
+                        {filteredKeyValuePairs.map(([key, value]) => (
+                          <li key={key}>
+                            {key}: {value}
+                          </li>
+                        ))}
+                      </ul>
+                    </Card>
+                  </Col>
+
+            </Card.Title>
+            <Card.Header className="text-center pb-5 mt-4" style={{backgroundColor:"#FFFFFF"}}>
+              <h5 className="py-4">Please save this QRcode or Order ID to access this page again.</h5>
+              <Image src = {qrurl} />
+            </Card.Header>
+          </Card>
+        </Row>
     </Container>
   );
 }

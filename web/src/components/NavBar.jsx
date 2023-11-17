@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Image, Nav, Navbar, Row } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth} from '../firebase';
@@ -6,7 +6,8 @@ import { signOut } from 'firebase/auth';
 const NavBar = () => {
   const [user] = useAuthState(auth);
 
-  fetch('https://zero-waste-api.vercel.app/')
+  useEffect(()=>{
+    fetch('https://zero-waste-api.vercel.app/')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -17,6 +18,7 @@ const NavBar = () => {
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
     });
+  })
 
   const handleSignOut = () => {
     signOut(auth).then(() => {

@@ -2,7 +2,7 @@ import React,{ useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 import { useNavigate } from "react-router-dom";
-import { Container, Form, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 const SignUpPage = () => {
     const [email, setEmail] = useState();
@@ -10,6 +10,8 @@ const SignUpPage = () => {
     const navigate = useNavigate();
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => { 
+        })
         .catch((error) => {
             console.log(error.code, error.message);
         });
@@ -24,7 +26,8 @@ const SignUpPage = () => {
       </Row>
 
       <Row className="justify-content-center">
-        <Col className="col-10" xs={6} md={5}>
+        <Col className="col-10 mt-3" xs={6} md={5}>
+          <Card className="p-5" style={{backgroundColor:"#e1ecf7"}}>
           <Form onSubmit={handleSignUp}>
 
             <Form.Group controlId="formUsernameSignUp" className="my-3">
@@ -52,6 +55,7 @@ const SignUpPage = () => {
             </Button>
             </div>
           </Form>
+          </Card>
         </Col>
       </Row>
     </Container>

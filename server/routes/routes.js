@@ -8,7 +8,7 @@ router.post('/postOrder', jsonParser, async(req, res) => {
     const data = new Order(req.body)
     try {
         const dataToSave = await data.save();
-        res.status(200).json(dataToSave)
+        res.status(200).json(dataToSave);
     }
     catch (error) {
         res.status(400).json({message: error.message})

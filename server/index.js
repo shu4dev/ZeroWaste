@@ -34,7 +34,8 @@ app.get('/', (req, res) =>{
   res.send("Hello World")
 })
 
-app.get('/checkDevice', (req, res) => {
+/**
+ * app.get('/checkDevice', (req, res) => {
   try {
     const device = new HID.HID(16701, 8455);
     console.log("device connect")
@@ -43,6 +44,7 @@ app.get('/checkDevice', (req, res) => {
     res.json({ success: false, error: error.message });
   }
 });
+ */
 
 app.get('/express_backend', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
