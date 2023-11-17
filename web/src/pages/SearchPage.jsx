@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Card, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-
+import {Plus} from 'react-bootstrap-icons';
 const SearchPage = () => {
   const [orderlist, setorderlist] = useState();
   const navigate = useNavigate();
@@ -60,14 +60,6 @@ const SearchPage = () => {
             </thead>
             <tbody>
               
-                {
-                orderlist ? orderlist.map((order) => (
-                  <tr>
-                    <td>{order._id}</td>
-                    <td>{order._id}</td>
-                  </tr>
-                )) : <></>
-                }
             </tbody>
           </Table>
             </div>

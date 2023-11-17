@@ -32,19 +32,17 @@ app.use('/api', routes);
 
 app.get('/', (req, res) =>{
   res.send({message : "Hello World"});
-})
+});
 
-/**
- * app.get('/checkDevice', (req, res) => {
+app.get('/checkDevice', (req, res) => {
   try {
+    const devices = HID.devices();
     const device = new HID.HID(16701, 8455);
-    console.log("device connect")
-    res.json({ success: true });
+    res.json({ success: true, devices : devices });
   } catch (error) {
     res.json({ success: false, error: error.message });
   }
 });
- */
 
 app.get('/express_backend', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
@@ -53,12 +51,12 @@ app.get('/express_backend', (req, res) => {
 
 database.on('error', (error) => {
   console.log(error)
-})
+});
 
 database.once('connected', () => {
   console.log('Database Connected');
-})
+});
 
 app.listen(port, () => {
   console.log(`Server Started at ${port}`)
-})
+});

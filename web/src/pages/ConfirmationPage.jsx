@@ -15,19 +15,18 @@ const ConfirmationPage = () => {
 
   useEffect(() =>{
     document.addEventListener('keypress', detectKeyPress);
-    /**
-     * const checkDevice = async () => {
-      try {
-        const response = await fetch('https://zero-waste-api.vercel.app/checkDevice');
-        const result = await response.json();
-        setDeviceStatus(result.success);
-      } catch (error) {
-        console.error('Error checking device:', error);
-        setDeviceStatus(false);
+    fetch('https://zero-waste-api.vercel.app/checkDevice')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
-    };
-    checkDevice();
-     */
+      return response.json();
+    }).then(data => {
+      console.log(data)
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
   })
 
   const handleClick = (buttonName) => {
