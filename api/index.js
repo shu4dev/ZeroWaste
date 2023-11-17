@@ -32,10 +32,8 @@ app.get('/', (req, res) =>{
 
 app.get('/checkDevice', (req, res) => {
   try {
-    console.log(devices);
     console.log("device connect");
-    res.json({device: devices})
-    res.json({ success: true });
+    res.json({ success: true, device: devices });
   } catch (error) {
     res.json({ success: false, error: error.message });
   }
