@@ -25,7 +25,7 @@ const ResultPage = () => {
       qrurl = url;
     })
     useEffect(() => {
-      fetch(`https://zero-waste-zeta.vercel.app/api/getOne/${OrderId}`, {
+      fetch(`https://zero-waste-api.vercel.app/api/getOne/${OrderId}`, {
         method: "GET"
       })
       .then(response => response.json())

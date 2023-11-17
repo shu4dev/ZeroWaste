@@ -3,20 +3,6 @@ import { Col, Container, Nav, Row } from 'react-bootstrap';
 import { Instagram } from 'react-bootstrap-icons';
 
 const Footer = () => {
-  // fetch('/express_backend')
-  //   .then(response => {
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //     return response.json();
-  //   })
-  //   .then(data => {
-  //     console.log(data);
-  //   })
-  //   .catch(error => {
-  //     console.error('There has been a problem with your fetch operation:', error);
-  //   });
-
   return (
     <Container fluid expand="xl" className="bg-dark py-4">
       <Row className="justify-content-center">

@@ -16,7 +16,7 @@ const ConfirmationPage = () => {
     document.addEventListener('keypress', detectKeyPress);
     const checkDevice = async () => {
       try {
-        const response = await fetch('https://zero-waste-zeta.vercel.app/checkDevice');
+        const response = await fetch('https://zero-waste-api.vercel.app/checkDevice');
         const result = await response.json();
         setDeviceStatus(result.success);
       } catch (error) {
@@ -32,7 +32,7 @@ const ConfirmationPage = () => {
     setActiveButton(buttonName === activeButton ? null : buttonName);
     setLoading(true);
     
-    fetch('https://zero-waste-zeta.vercel.app/api/postOrder', {
+    fetch('https://zero-waste-api.vercel.app/api/postOrder', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', 

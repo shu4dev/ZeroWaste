@@ -55,32 +55,3 @@ database.once('connected', () => {
 app.listen(port, () => {
   console.log(`Server Started at ${port}`)
 })
-/**
- * 
-
-
-
-
-
- * 
-
-
-app.use('/api', routes)
-
-app.get('/checkDevice', (req, res) => {
-  try {
-    res.json({ success: true, device: devices });
-  } catch (error) {
-    res.json({ success: false, error: error.message });
-  }
-});
-
-app.get('/express_backend', (req, res) => {
-  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
-}); 
-
-
-
-
-
- */
