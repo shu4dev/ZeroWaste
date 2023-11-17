@@ -18,11 +18,6 @@ const UserSchema = new Schema({
       default: "",
       required: true,
     },
-    Password: {
-        type: String,
-        default: "",
-        required: true,
-    }
   },
   {collection: "UserInfo"}
 );

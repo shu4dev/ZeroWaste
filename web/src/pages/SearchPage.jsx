@@ -46,6 +46,7 @@ const SearchPage = () => {
               </tr>
             </thead>
             <tbody>
+              
             </tbody>
           </Table>
             </div>
