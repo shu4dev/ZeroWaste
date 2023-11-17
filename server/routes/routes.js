@@ -5,7 +5,6 @@ const {Order, UserInfo} = require('../models/model');
 const jsonParser = bodyParser.json();
 
 router.post('/postOrder', jsonParser, async(req, res) => {
-    console.log(req.body);
     const data = new Order(req.body)
     try {
         const dataToSave = await data.save();
