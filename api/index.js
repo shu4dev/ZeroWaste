@@ -32,13 +32,7 @@ app.get('/', (req, res) =>{
   res.send("Hello World")
 })
 
-app.get('/checkDevice', (req, res) => {
-  try {
-    res.json({ success: true, device: devices });
-  } catch (error) {
-    res.json({ success: false, error: error.message });
-  }
-});
+
 
 app.get('/express_backend', (req, res) => {
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); 
