@@ -1,15 +1,19 @@
 const express = require('express');
 const app = express();
-
-
+require('dotenv').config();
+const port = process.env.PORT;
 app.get('/', (req, res) =>{
+
   res.send("Hello World");
 })
 
+app.listen(port, () => {
+  console.log(`Server Started at ${port}`)
+})
 /**
  * const mongoose = require('mongoose');
 const cors = require('cors');
-require('dotenv').config();
+
 
 
 const mongoString = process.env.DATABASE_URL
@@ -55,7 +59,5 @@ database.once('connected', () => {
   console.log('Database Connected');
 })
 
-app.listen(port, () => {
-  console.log(`Server Started at ${port}`)
-})
+
  */
