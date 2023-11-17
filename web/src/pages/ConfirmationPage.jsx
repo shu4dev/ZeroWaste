@@ -34,10 +34,9 @@ const ConfirmationPage = () => {
   
     setActiveButton(buttonName === activeButton ? null : buttonName);
     setLoading(true);
-    
     fetch('https://zero-waste-api.vercel.app/api/postOrder', {
       method: 'POST',
-      body: JSON.stringify(obj)
+      body: obj
     }).then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
