@@ -6,9 +6,7 @@ import { signOut } from 'firebase/auth';
 const NavBar = () => {
   const [user] = useAuthState(auth);
 
-  fetch('https://zero-waste-api.vercel.app/express_backend', {
-    mode: 'no-cors'
-    })
+  fetch('https://zero-waste-api.vercel.app/')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
