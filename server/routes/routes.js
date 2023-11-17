@@ -25,6 +25,7 @@ router.post('/postuser', jsonParser, async (req, res) => {
         res.status(400).json({message: error.message})
     }
 })
+
 router.post('/getInfo', jsonParser, async (req, res) => {
     try{
         const data = await UserInfo.findOne({Username: req.body.Username, Password: req.body.Password});

@@ -31,7 +31,7 @@ app.all('/', function(req, res, next) {
 app.use('/api', routes);
 
 app.get('/', (req, res) =>{
-  res.send("Hello World")
+  res.send({message : "Hello World"});
 })
 
 /**

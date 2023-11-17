@@ -15,7 +15,8 @@ const ConfirmationPage = () => {
 
   useEffect(() =>{
     document.addEventListener('keypress', detectKeyPress);
-    const checkDevice = async () => {
+    /**
+     * const checkDevice = async () => {
       try {
         const response = await fetch('https://zero-waste-api.vercel.app/checkDevice');
         const result = await response.json();
@@ -26,6 +27,7 @@ const ConfirmationPage = () => {
       }
     };
     checkDevice();
+     */
   })
 
   const handleClick = (buttonName) => {
