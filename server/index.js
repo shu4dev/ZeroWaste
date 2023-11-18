@@ -4,7 +4,6 @@ const routes = require('./routes/routes');
 const HID = require('node-hid');
 const cors = require('cors');
 require('dotenv').config();
-const jsonParser = bodyParser.json();
 
 const mongoString = process.env.DATABASE_URL
 mongoose.connect(mongoString, { dbName: 'Master'});
@@ -35,7 +34,7 @@ app.get('/', (req, res) =>{
   res.send({message : "Hello World"});
 });
 
-app.get('/checkDevice', jsonParser, (req, res) => {
+app.get('/checkDevice', (req, res) => {
   try {
     const device = new HID.HID(16701, 8455);
     res.json({ success: true, devices : device });
