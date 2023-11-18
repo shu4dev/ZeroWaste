@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Card, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import {Plus} from 'react-bootstrap-icons';
 
 const SearchPage = () => {
 
@@ -58,7 +57,6 @@ const SearchPage = () => {
                 <th>Order ID</th>
                 <th>Detail</th>
                 <th>return status</th>
-                <th>Add to your account</th>
               </tr>
             </thead>
             <tbody>
@@ -80,7 +78,6 @@ const SearchPage = () => {
                       </ul>
                     </td>
                     <td>{order["return"].toString()}</td>
-                    <td><Plus/></td>
                   </tr>
                 ))
               }
