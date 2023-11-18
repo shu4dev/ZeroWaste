@@ -1,7 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Container, Row, Col, Card } from 'react-bootstrap';
-
+import { useAuthState } from 'react-firebase-hooks/auth';
+import {auth} from '../firebase';
 const OrderHistoryPage = () => {
+
+  const [user] = useAuthState(auth);
+  useEffect(() =>{
+    fetch('https://zero-waste-api.vercel.app/api/getOrder')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      } 
+      else {
+        return response.json();
+      }
+    })
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  })
   return (
     <Container className="mt-5 vh-100">
         <Row className="justify-content-center">

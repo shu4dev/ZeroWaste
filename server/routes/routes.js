@@ -26,10 +26,10 @@ router.post('/postuser', jsonParser, async (req, res) => {
     }
 })
 
-router.post('/getInfo', jsonParser, async (req, res) => {
+router.post('/getOrder', jsonParser, async (req, res) => {
     try{
-        const data = await UserInfo.findOne({Username: req.body.Username, Password: req.body.Password});
-        res.json(data)
+        const data = await UserInfo.findOne({Email : req.body.Email});
+        res.send(data.Order);
     }
     catch (error) {
         res.status(400).json({message: error.message})
