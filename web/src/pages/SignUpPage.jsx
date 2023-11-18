@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 const SignUpPage = () => {
+  
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
+
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => { 
@@ -15,6 +17,28 @@ const SignUpPage = () => {
         .catch((error) => {
             console.log(error.code, error.message);
         });
+
+        fetch('https://zero-waste-api.vercel.app/api/postuser', 
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(email)
+        }
+        ).then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
         navigate("/");
     }
 

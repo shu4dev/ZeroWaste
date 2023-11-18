@@ -18,6 +18,11 @@ const UserSchema = new Schema({
       default: "",
       required: true,
     },
+    Order : {
+      type : Array,
+      default: [],
+      required : true
+    }
   },
   {collection: "UserInfo"}
 );

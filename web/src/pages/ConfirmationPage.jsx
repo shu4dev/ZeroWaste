@@ -2,9 +2,12 @@ import React, {useEffect, useState} from 'react';
 import { useLocation, Navigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import {auth} from '../firebase';
 let id = "";
 const ConfirmationPage = () => { 
 
+  const [user] = useAuthState(auth);
   const location = useLocation();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -12,6 +15,7 @@ const ConfirmationPage = () => {
   const [deviceStatus, setDeviceStatus] = useState(null);
   const data = location.state.filter((item) =>{return item.quantity > 0});
   const obj = Object.fromEntries(data.map(item => [item.name, item.quantity]))
+  
 
   useEffect(() =>{
     document.addEventListener('keypress', detectKeyPress);
@@ -56,6 +60,10 @@ const ConfirmationPage = () => {
       console.error('Error:', error);
     });
 
+    if (user) {
+      fetch()
+    }
+
     if (buttonName === "Button2" || buttonName === "Button3") {
       setTimeout(() => {
         navigate(`/result/${id}`);
@@ -77,7 +85,7 @@ const ConfirmationPage = () => {
     return <Navigate to = "/" replace={true}/>
   }
   return (
-    <Container className="vh-100">
+    <Container>
       <Row className="my-5 text-center">
         <h1>Confirmation Page</h1>
       </Row>

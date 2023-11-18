@@ -38,7 +38,7 @@ const ResultPage = () => {
       }, [OrderId]);
       const filteredKeyValuePairs = apiData ? Object.entries(apiData).filter(([key, value]) => value > 0) : [];
   return (
-    <Container className="mt-5 vh-100">
+    <Container className="mt-5">
         <Row className="justify-content-center text-center">
             <h1>Thank you for ordering</h1>
             <br/>
