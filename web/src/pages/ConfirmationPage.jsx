@@ -11,7 +11,7 @@ const ConfirmationPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
-  const [deviceStatus, setDeviceStatus] = useState(null);
+  const [deviceStatus, setDeviceStatus] = useState(false);
   const data = location.state.filter((item) =>{return item.quantity > 0});
   const obj = Object.fromEntries(data.map(item => [item.name, item.quantity]))
   
@@ -21,13 +21,11 @@ const ConfirmationPage = () => {
     document.addEventListener('keypress', detectKeyPress);
     fetch('/checkDevice')
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      } 
-      else {
+      if (response.ok) {
         setDeviceStatus(true);
-        return response.json();
-      }
+        return response.json();  
+      } 
+      throw new Error('Network response was not ok');
     })
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);

@@ -60,7 +60,8 @@ router.get('/getOne/:id', async (req, res) => {
 
 router.post('/getMulti', async (req, res) => {
     try {
-        const data = await Order.find({_id: {$in: req.body.idarr}});
+        const user = await UserInfo.find({Email: req.body.Email});
+        const data = await Order.find({_id: {$in: user.Order}});
         res.json(data)
     }
     catch(error){
