@@ -124,7 +124,7 @@ const ConfirmationPage = () => {
       <Row className="py-4 justify-content-center text-center">
         <Col className="col-10" xs={6} md={6}>
 
-          <Button onClick={handleEdit} variant="primary" disabled={loading} type="submit" className="w-100 my-2" >Edit Order</Button>
+          <Button onClick={handleEdit} variant="primary" disabled={loading} type="submit" className="w-100 my-2" >restart Order</Button>
 
           {
             deviceStatus && 
