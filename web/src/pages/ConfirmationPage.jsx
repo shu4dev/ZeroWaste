@@ -18,6 +18,7 @@ const ConfirmationPage = () => {
   
 
   useEffect(() =>{
+
     document.addEventListener('keypress', detectKeyPress);
     fetch('/checkDevice')
     .then(response => {
@@ -61,7 +62,26 @@ const ConfirmationPage = () => {
     });
 
     if (user) {
-      fetch()
+      fetch('https://zero-waste-api.vercel.app/api/postOrder',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user ? {email : user, orderID : id} : {})
+      }
+      ).then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     }
 
     if (buttonName === "Button2" || buttonName === "Button3") {

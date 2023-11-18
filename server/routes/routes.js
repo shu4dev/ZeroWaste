@@ -59,27 +59,14 @@ router.get('/getOne/:id', async (req, res) => {
 })
 
 //Update by ID Method
-router.patch('/update/:id', jsonParser, async (req, res) => {
+router.patch('/update', jsonParser, async (req, res) => {
     try {
-        const id = req.params.id;
-        const updateData = req.body;
-        const options = {new: true};
-        const result = await Model.findByIdAndUpdate(
-            id, updateData, options
+        const updateUser = req.body.email;
+        const updateData = req.body.orderID;
+        const result = await Model.findOneAndUpdate(
+            {Email: updateUser}, {$addToSet : {Order: updateData}}
         )
         res.send(result)
-    }
-    catch (error) {
-        res.status(400).json({ message: error.message })
-    }
-})
-
-//Delete by ID Method
-router.delete('/delete/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const data = await Model.findByIdAndDelete(id)
-        res.send(`Document with ${data.name} has been deleted..`)
     }
     catch (error) {
         res.status(400).json({ message: error.message })
