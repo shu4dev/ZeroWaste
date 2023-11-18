@@ -58,16 +58,7 @@ router.get('/getOne/:id', async (req, res) => {
     }
 })
 
-router.post('/getMulti', async (req, res) => {
-    try {
-        const user = await UserInfo.find({Email: req.body.Email});
-        const data = await Order.find({_id: {$in: user.Order}});
-        res.json(data)
-    }
-    catch(error){
-        res.status(500).json({message: error.message})
-    }
-})
+
 
 //Update by ID Method
 router.patch('/update', jsonParser, async (req, res) => {
