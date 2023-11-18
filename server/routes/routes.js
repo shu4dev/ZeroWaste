@@ -61,9 +61,9 @@ router.get('/getOne/:id', async (req, res) => {
 //Update by ID Method
 router.patch('/update', jsonParser, async (req, res) => {
     try {
-        const updateUser = req.body.email;
-        const updateData = req.body.orderID;
-        const result = await Model.findOneAndUpdate(
+        const updateUser = req.body.Email;
+        const updateData = req.body.Order;
+        const result = await UserInfo.findOneAndUpdate(
             {Email: updateUser}, {$addToSet : {Order: updateData}}
         )
         res.send(result)

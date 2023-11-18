@@ -6,7 +6,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth} from '../firebase';
 let id = "";
 const ConfirmationPage = () => { 
-
   const [user] = useAuthState(auth);
   const location = useLocation();
   const navigate = useNavigate();
@@ -39,6 +38,7 @@ const ConfirmationPage = () => {
   
     setActiveButton(buttonName === activeButton ? null : buttonName);
     setLoading(true);
+
     fetch('https://zero-waste-api.vercel.app/api/postOrder', 
     {
       method: 'POST',
@@ -47,48 +47,47 @@ const ConfirmationPage = () => {
       },
       body: JSON.stringify(obj)
     }
-    ).then(response => {
+    ).then( response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response.json();
     })
     .then(data => {
-      console.log('Success:', data);
       id = data["_id"];
+      console.log('Success:', data);
+      if (user) {
+        fetch('https://zero-waste-api.vercel.app/api/update',
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(user ? {Email : user.email, Order : id} : {})
+        }
+        ).then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          console.log('Success:', data);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      }
+  
+      if (buttonName === "Button2" || buttonName === "Button3") {
+        setTimeout(() => {
+          navigate(`/result/${id}`);
+      }, 5000);
+    }
     })
     .catch(error => {
       console.error('Error:', error);
-    });
-
-    if (user) {
-      fetch('https://zero-waste-api.vercel.app/api/postOrder',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user ? {email : user, orderID : id} : {})
-      }
-      ).then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      });
-    }
-
-    if (buttonName === "Button2" || buttonName === "Button3") {
-      setTimeout(() => {
-        navigate(`/result/${id}`);
-    }, 5000);
-  }
+    });    
   }
   
   const handleEdit = () => {

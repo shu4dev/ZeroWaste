@@ -5,15 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Row, Col, Card } from 'react-bootstrap';
 
 const SignUpPage = () => {
-  
+
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
 
     const handleSignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => { 
-        })
         .catch((error) => {
             console.log(error.code, error.message);
         });
@@ -24,7 +22,7 @@ const SignUpPage = () => {
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(email)
+          body: JSON.stringify({Email :email})
         }
         ).then(response => {
           if (!response.ok) {

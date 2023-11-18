@@ -29,7 +29,7 @@ const SearchPage = () => {
     navigate(`/result/${OrderId}`);
   }
   return (
-    <Container className="mt-5 vh-100">
+    <Container className="mt-5">
 
        <Row className="justify-content-center">
        <Col md={7}>
