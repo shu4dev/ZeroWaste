@@ -3,7 +3,7 @@ import { Container, Row, Col, Card, Table } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {auth} from '../firebase';
 const OrderHistoryPage = () => {
-  const [orderlist, setorderlist] = useState();
+  const [OrderList, setorderList] = useState();
   const [user] = useAuthState(auth);
 
   useEffect(() =>{
@@ -23,16 +23,12 @@ const OrderHistoryPage = () => {
       }
     })
     .then(data => {
-      setorderlist(data);
-      console.log(data);
+      setorderList(data);
     })
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
     });
   },[user])
-
-  
-  
   
   return (
     <Container className="mt-5 vh-100">
@@ -43,9 +39,9 @@ const OrderHistoryPage = () => {
           </Col>
           <Row xs={1} md={2} className="g-4 justify-content-center m-3">
             <Card className="p-5 text-center" style={{backgroundColor:"#e1ecf7"}}>
-              <h4>No Orders Yet</h4>
+              
               <Table striped bordered hover>
-            <thead>
+              <thead>
               <tr>
                 <th>Order ID</th>
                 <th>Detail</th>
@@ -53,7 +49,27 @@ const OrderHistoryPage = () => {
               </tr>
             </thead>
             <tbody>
-             
+              {
+                OrderList ? OrderList.map((order) => (
+                  <tr>
+                    <td>{order["_id"]}</td>
+                    <td>
+                      <ul>
+                        {
+                        Object.entries(order).filter(([key, value]) => 
+                          typeof value === 'number' && key !== "__v"
+                        ).map(([key, value]) => (
+                          <li key={key}>
+                            {key}: {value}
+                          </li>
+                        ))
+                        }
+                      </ul>
+                    </td>
+                    <td>{order["return"].toString()}</td>
+                  </tr>
+                )) : <h4>No Orders Yet</h4>
+              }
             </tbody>
           </Table>
             </Card>
