@@ -9,20 +9,21 @@ const ConfirmationPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [activeButton, setActiveButton] = useState(null);
-  //const [deviceStatus, setDeviceStatus] = useState(null);
+  const [deviceStatus, setDeviceStatus] = useState(null);
   const data = location.state.filter((item) =>{return item.quantity > 0});
   const obj = Object.fromEntries(data.map(item => [item.name, item.quantity]))
 
   useEffect(() =>{
     document.addEventListener('keypress', detectKeyPress);
-    fetch('https://zero-waste-api.vercel.app/checkDevice')
+    fetch('/checkDevice')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
+      } 
+      else {
+        setDeviceStatus(true);
+        return response.json();
       }
-      return response.json();
-    }).then(data => {
-      console.log(data)
     })
     .catch(error => {
       console.error('There has been a problem with your fetch operation:', error);
@@ -100,8 +101,12 @@ const ConfirmationPage = () => {
 
           <Button onClick={handleEdit} variant="primary" disabled={loading} type="submit" className="w-100 my-2" >Edit Order</Button>
 
-         
-
+          {
+            deviceStatus && 
+              <Button onClick={() => handleClick('Button1')} disabled={loading} variant="primary" type="submit" className="w-100">Credit Card</Button>
+              
+          }
+          { activeButton === "Button1" && <Col>Please tap your credit card</Col> }
           <Button onClick={() => handleClick('Button2')} disabled={loading} variant="primary" type="submit"  className="w-100 my-2">Student ID</Button>
           {
             activeButton === "Button2" && <Col>Please provide you student ID to rent your container(s) <br/> direct to result page in 5 seconds....</Col>
@@ -117,13 +122,3 @@ const ConfirmationPage = () => {
   )
 };
 export default ConfirmationPage;
-/**
- *  {
-            deviceStatus && <Col md="2">
-              <Button onClick={() => handleClick('Button1')} disabled={loading} variant="primary" type="submit" className="w-100">Credit Card</Button>
-              {
-                activeButton === "Button1" && <Col>Please tap your credit card</Col>
-              }
-            </Col>
-          }
- */

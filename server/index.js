@@ -36,8 +36,8 @@ app.get('/', (req, res) =>{
 
 app.get('/checkDevice', (req, res) => {
   try {
-    const devices = HID.devices();
-    res.json({ success: true, devices : devices });
+    const device = new HID.HID(16701, 8455);
+    res.json({ success: true, devices : device });
   } catch (error) {
     res.json({ success: false, error: error.message });
   }
