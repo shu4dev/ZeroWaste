@@ -36,7 +36,7 @@ const ResultPage = () => {
         console.error('Error fetching data:', error);
       });
       }, [OrderId]);
-      const filteredKeyValuePairs = apiData ? Object.entries(apiData).filter(([key, value]) => value > 0): [];
+      const filteredKeyValuePairs = apiData ? Object.entries(apiData).filter(([key, value]) => value > 0) : [];
   return (
     <Container className="mt-5 vh-100">
         <Row className="justify-content-center text-center">

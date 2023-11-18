@@ -2,28 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { Container, Row, Col, Form, Button, Card, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import {Plus} from 'react-bootstrap-icons';
-const SearchPage = () => {
-  const [orderlist, setorderlist] = useState();
-  const navigate = useNavigate();
-  const [OrderId, setOrderid] = useState();
-  const handleSearch = () =>{
-    
-    navigate(`/result/${OrderId}`);
-  }
 
+const SearchPage = () => {
+
+  const [OrderId, setOrderid] = useState();
+  const [OrderList, setOrderList] = useState([]);
   useEffect(()=>{
     fetch('https://zero-waste-api.vercel.app/api/getAll')
     .then(res => {
       return res.json();
     })
     .then(data => {
-      setorderlist(data);
+      setOrderList(data);
     })
     .catch(error => {
       console.log('Error fetching data', error);
     })
   })
+  
 
+  const navigate = useNavigate();
+
+
+  const handleSearch = () =>{
+    
+    navigate(`/result/${OrderId}`);
+  }
   return (
     <Container className="mt-5 vh-100">
        <Row className="justify-content-center">
@@ -58,8 +62,30 @@ const SearchPage = () => {
                 <th>Add to your account</th>
               </tr>
             </thead>
+            
             <tbody>
-              
+              {
+                OrderList && OrderList.map((order) => (
+                  <tr>
+                    <td>{order["_id"]}</td>
+                    <td>
+                      <ul>
+                        {
+                        Object.entries(order).filter(([key, value]) => 
+                          typeof value === 'number' && key !== "__v"
+                        ).map(([key, value]) => (
+                          <li key={key}>
+                            {key}: {value}
+                          </li>
+                        ))
+                        }
+                      </ul>
+                    </td>
+                    <td>{order["return"].toString()}</td>
+                    <td><Plus/></td>
+                  </tr>
+                ))
+              }
             </tbody>
           </Table>
             </div>
