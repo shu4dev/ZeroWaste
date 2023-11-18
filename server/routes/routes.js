@@ -58,7 +58,7 @@ router.get('/getOne/:id', async (req, res) => {
     }
 })
 
-router.get('/getMulti', async (req, res) => {
+router.post('/getMulti', async (req, res) => {
     try {
         const data = await Order.find({_id: {$in: req.body.idarr}});
         res.json(data)
