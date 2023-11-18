@@ -4,6 +4,7 @@ import { Instagram } from 'react-bootstrap-icons';
 
 const Footer = () => {
   return (
+    <footer className="mt-auto bg-light">
     <Container fluid expand="xl" className="bg-dark py-4">
       <Row className="justify-content-center">
         <Col className={"justify-content-center ps-5"}>
@@ -24,6 +25,7 @@ const Footer = () => {
         </Col>
       </Row>
     </Container>
+    </footer>
   );
 }
 

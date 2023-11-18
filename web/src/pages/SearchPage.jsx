@@ -30,14 +30,16 @@ const SearchPage = () => {
   }
   return (
     <Container className="mt-5 vh-100">
+
        <Row className="justify-content-center">
-       <Col md={6}>
+       <Col md={7}>
        <h1 className="text-center mb-4">Search Page</h1>
        </Col>
       </Row>
+
       <Row className="justify-content-center mt-1">
-        <Col className="col-10" xs={6} md={5}>
-          <Card className="p-5 text-center " style={{backgroundColor:"#e1ecf7"}}>
+        <Col className="col-10" xs={6} md={10}>
+          <Card  className=" h-100 p-5 text-center" style={{backgroundColor:"#e1ecf7"}}>
           <Form onSubmit={handleSearch}>
 
             <Form.Group controlId="formUsernameSignUp" className="my-3">
@@ -49,20 +51,16 @@ const SearchPage = () => {
                 className="p-3"
               />
             </Form.Group>
-            <div className="text-center">
-            <Button variant="primary" type="submit" className="my-3 px-5">
-              Search
-            </Button>
+            <Button variant="primary" type="submit" className="my-3 px-5">Search</Button>
             <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Order ID</th>
                 <th>Detail</th>
-                <th>status</th>
+                <th>return status</th>
                 <th>Add to your account</th>
               </tr>
             </thead>
-            
             <tbody>
               {
                 OrderList && OrderList.map((order) => (
@@ -88,11 +86,11 @@ const SearchPage = () => {
               }
             </tbody>
           </Table>
-            </div>
           </Form>
           </Card>
         </Col>
       </Row>
+
     </Container>
   );
 };
